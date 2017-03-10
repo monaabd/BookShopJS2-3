@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Find your book</title>
+    <script src="bookshop.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+    integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    
+   
+      
+     <style>
+       html, body {
+		 background-image: url("book.jpg") ;
+		 
+         }
+         
+         .container{
+             margin-top: 70px;
+             margin-left: 70px;
+         }
+         
+      </style>
+  </head>
+  <body>
+      
+      <div class="container">
+         <div class="row">
+            <!-- col-sm-6 col-md-6 can add -->
+             <div class=" col-lg-6">
+                  <div class="panel panel-default">
+                     <div class="text-center"> <h3 style="color:white;">Add Your Book</h3>
+                     </div>
+        </div>
+     <button type="button" class="btn btn-primary" id="add">Add books</button>
+  </div>
+   </div>  
+               
+    <div>
+      <input type="email" class="form-control" id="inputTitle" placeholder="Title" style="width:30vw;">
+      <input type="email" class="form-control" id="inputAuthor" placeholder="Author" style="width:30vw;">
+        <div id="addBook" style="border:3px solid white ;color:  white ;"></div>  
+    </div>
+    <div>
+    <button type="button" class="btn btn-success">Update Book </button>
+    </div> 
+    <button id="deleteButton" type="button" class="btn btn-danger">Delete This Book
+    </button>
+      <input type="email" class="form-control" id="inputDelete" placeholder="Enter Book Id" style="width:40vw;">
+    
+    <div>
+      <button type="button" class="btn btn-success" id="viewButton">View data</button>
+      <div id="viewBook" style="border:3px solid white ;color:  white;"></div>
+        
+      </div>
+    </div> 
+  </body>
+</html>
