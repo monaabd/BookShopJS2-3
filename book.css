@@ -1,0 +1,29 @@
+
+       body {
+		 background-image: url("book.jpg") ;
+		 
+         }
+         
+         .container{
+             margin-top: 70px;
+             margin-left: 70px;
+         }
+         #Api{
+             background-color: white;
+             width:40vw ; 
+             
+         }
+         
+#addBook {
+    border:3px solid ;
+    background-color: coral;
+    color: white ;
+     width:40vw ; 
+}
+#viewBook{
+    
+  border:3px solid ;
+    background-color: coral;
+    color:  white;
+    width:40vw ; 
+}

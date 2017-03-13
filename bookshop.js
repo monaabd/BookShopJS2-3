@@ -5,12 +5,31 @@ window.onload = function(){
   let viewBook = document.getElementById("viewBook");
   let inputTitle = document.getElementById("inputTitle").value;
   let inputAuthor = document.getElementById("inputAuthor").value;
-   let inputDelete= document.getElementById("inputDelete").value; 
-    
-    
+   let inputDelete = document.getElementById("inputDelete").value; 
+    var changeBook=document.getElementById("changeBook");
+    let changeAuthor= document.getElementById("changeAuthor").value;
+    let changeTitle= document.getElementById("changeTitle").value;
+    let apiKey = document.getElementById("apiKey");
+    let Api= document.getElementById("Api");
+    let key= 'aT4dA';
+        
+   apiKey.addEventListener("click",function(event){
+       console.log('click');
+        fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?requestKey`)
+         .then(function(response){ 
+            response.json().then(function(json){
+             Api.innerHTML=json.key;
+              key=json.key;  
+            console.log(json.key);
+               });
+                        
+    }) ; //fetch       
+   }) ;// addEven
+        
   add.addEventListener("click", function(event) {
-      
-     fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=aT4dA&title=${inputTitle}&author=${inputAuthor}`)
+      inputTitle = document.getElementById("inputTitle").value;
+      inputAuthor = document.getElementById("inputAuthor").value;
+     fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${key}&title=${inputTitle}&author=${inputAuthor}`)
          .then(function(response){ 
          
          
@@ -24,15 +43,18 @@ window.onload = function(){
          console.log("Fetch Result:");
             if(data.status==="success"){ 
                 console.log(data.status);
-             addBook.innerHTML= ` Your book added successfully`}
+             addBook.innerHTML= ` Your book added successfully`;
+            viewBooks(1);
+            }
             // else( addBook.innerHTML=`There is an error please try again`);
          } )    
      });//fetch1
        
   })// add.event
   
-  viewButton.addEventListener("click",function(event){
-     fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=select&key=aT4dA`)
+  function viewBooks(nr){
+      let tries = nr;
+    fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=select&key=${key}`)
          .then(function(response){  
          response.json().then(function(data){
             
@@ -55,22 +77,54 @@ window.onload = function(){
                  viewDiv.appendChild(eleTitle);
                  viewDiv.appendChild(eleAuthor);
              })
-             
-         }
+         } 
+        else if (data.status==="error"){
+            if (tries < 10){
+                tries++
+                viewBooks(tries);
+            }
+        }
          })
-         
-        
-         }
-                                                                                                                                          )
+  })
+}
+    
+  viewButton.addEventListener("click",function(event){
+        viewBooks(1);                                                               
   });//viewButton
     
     deleteButton.addEventListener("click",function(event){
-        //let inputDelete = document.getElementById("inputDelete").value;
-     fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=delete&key=aT4dA&id=${inputDelete}`)
+    inputDelete = document.getElementById("inputDelete").value;
+     fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=delete&key=${key}&id=${inputDelete}`)
          .then(function(response){  
          response.json().then(function(data){
+          if(data.status==="success"){
+              console.log("book deleted");
+          }
+         else {
+             console.log("davids error");
+         }
+             
          })
          
      })
-         });
+         }); //addeventDelete
+    
+    console.log(changeBook);
+    changeBook.addEventListener("click",function(event){
+    inputDelete = document.getElementById("inputDelete").value;
+    changeAuthor = document.getElementById("changeAuthor").value;
+    changeTitle = document.getElementById("changeTitle").value;
+     fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${key}&id=${inputDelete}&title=${changeAuthor}&author=${changeTitle}`)
+         .then(function(response){  
+         response.json().then(function(data){
+         if(data.status==="success"){
+             console.log("data changed");
+         }
+             else {
+                 console.log("error try again");
+             }
+         })
+     })
+         }); // addevent changebutton
 } //window load
+ 
