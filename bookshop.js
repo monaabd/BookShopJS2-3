@@ -9,10 +9,32 @@ window.onload = function(){
     var changeBook=document.getElementById("changeBook");
     let changeAuthor= document.getElementById("changeAuthor").value;
     let changeTitle= document.getElementById("changeTitle").value;
+    let google= document.getElementById("google");
+    let googleList=document.getElementById("googleList");
+    let search=document.getElementById("search"); // button
     let apiKey = document.getElementById("apiKey");
     let Api= document.getElementById("Api");
     let key= 'aT4dA';
-        
+    
+    search.addEventListener("click",function(event){
+           
+         let q = document.getElementById("google").value; 
+          fetch(`https://www.googleapis.com/books/v1/volumes?q=${q}`)
+         .then(function(response){ 
+            response.json().then(function(json){
+             googleList.innerHTML='';
+            json.items.forEach(book =>{
+                 googleList.innerHTML +=`<p> Founded Title is: ${book.volumeInfo.title},   By : ${book.volumeInfo.authors}</p>`;
+            })
+              
+                
+             console.log(json);
+            
+               });
+    })
+  
+     }) //google event                   
+   
    apiKey.addEventListener("click",function(event){
        console.log('click');
         fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?requestKey`)

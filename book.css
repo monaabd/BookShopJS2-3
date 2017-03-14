@@ -13,7 +13,11 @@
              width:40vw ; 
              
          }
-         
+         #googleList{
+             background-color: white;
+             width:40vw ; 
+             
+         }
 #addBook {
     border:3px solid ;
     background-color: coral;
